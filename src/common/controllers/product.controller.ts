@@ -22,7 +22,10 @@ export class ProductController {
   @ApiBearerAuth('defaultBearerAuth')
   @Post()
   create(@Body() createProductDto: CreateProductDto) {
-    return this.productService.create(createProductDto);
+    return this.productService.create({
+      ...createProductDto,
+      categories: { connect: createProductDto.categories },
+    });
   }
 
   @Public()
@@ -39,11 +42,18 @@ export class ProductController {
 
   @ApiBearerAuth('defaultBearerAuth')
   @Patch(':id')
-  update(
+  async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateProductDto: UpdateProductDto,
   ) {
-    return this.productService.update({ id }, updateProductDto);
+    const categories = updateProductDto.categories;
+    await this.productService.update(
+      { id },
+      {
+        ...updateProductDto,
+        categories: categories ? { connect: categories } : undefined,
+      },
+    );
   }
 
   @ApiBearerAuth('defaultBearerAuth')

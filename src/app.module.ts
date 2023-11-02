@@ -9,7 +9,7 @@ import { ConfigModule } from '@nestjs/config';
   imports: [
     CommonModule,
     DatabaseModule,
-    AuthModule,
+    // AuthModule,
     ConfigModule.forRoot({ isGlobal: true }),
   ],
 

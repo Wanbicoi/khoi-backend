@@ -17,7 +17,7 @@ export class ProductService {
   }
 
   findAll() {
-    return this.prisma.product.findMany();
+    return this.prisma.product.findMany({ include: { categories: true } });
   }
 
   async update(

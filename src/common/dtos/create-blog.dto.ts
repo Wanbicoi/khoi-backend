@@ -1,7 +1,7 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, Max, Min } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty } from 'class-validator';
 
-export class CreateProductDto {
+export class CreateBlogDto {
   @ApiProperty({ example: 'Banh xeo`' })
   @IsNotEmpty()
   title: string;
@@ -11,35 +11,7 @@ export class CreateProductDto {
   @IsNotEmpty()
   description: string;
 
-  @ApiProperty({ example: '1000000' })
-  @IsNotEmpty()
-  @Max(90000000)
-  @Min(0)
-  price: number;
-
-  @ApiProperty({ example: 100 })
-  @IsNotEmpty()
-  @Max(90000000)
-  @Min(0)
-  listPrice: number;
-
   @ApiProperty({ example: '900000' })
   @IsNotEmpty()
   details: object;
-
-  @ApiProperty({ example: 100 })
-  @IsNotEmpty()
-  @Max(10000000)
-  @Min(0)
-  weight: number;
-
-  @ApiProperty({ example: 40 })
-  @IsNotEmpty()
-  @Max(10000000)
-  @Min(0)
-  quantity: number;
-
-  @ApiPropertyOptional({ example: [{ id: 1 }, { id: 2 }] })
-  @IsOptional()
-  categories?: { id: number }[];
 }

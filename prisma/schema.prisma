@@ -10,20 +10,42 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    Int     @default(autoincrement()) @id
-  email String  @unique
-  phone String  @unique
-  name  String?
+model Product {
+  id        Int      @default(autoincrement()) @id
+  title     String
+  description String
+  details   Json
+  price     Int
+  listPrice Int
+  weight    Int
+  quantity  Int
+
+  categories Category[]
+  comments Comment[]
+}
+
+model Category {
+  id        Int      @default(autoincrement()) @id
+  title     String
 
   products Product[]
 }
 
-model Product {
+model Comment {
   id        Int      @default(autoincrement()) @id
-  title     String
-  price     Int
+  userName  String
+  userPhone String
+  userComment String
+  userStar  Int @db.SmallInt
 
-  owner     User?    @relation(fields: [ownerId], references: [id])
-  ownerId   Int?
+  product Product    @relation(fields: [productId], references: [id])
+  productId Int
+}
+
+model Blog {
+  id        Int      @default(autoincrement()) @id
+  createdAt DateTime @default(now()) @db.Date
+  title     String
+  description String
+  details   Json
 }
