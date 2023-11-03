@@ -14,11 +14,11 @@ model Product {
   id        Int      @default(autoincrement()) @id
   title     String
   description String
-  details   Json
+  images    Json
+  weights   Json
   price     Int
   listPrice Int
-  weight    Int
-  quantity  Int
+  details   Json
 
   categories Category[]
   comments Comment[]
@@ -38,7 +38,7 @@ model Comment {
   userComment String
   userStar  Int @db.SmallInt
 
-  product Product    @relation(fields: [productId], references: [id])
+  product Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId Int
 }
 

@@ -21,9 +21,7 @@ async function bootstrap() {
 
   // Swagger
   const config = new DocumentBuilder()
-    .setTitle('OpenAPI Documentation')
-    .setDescription('The sample API description')
-    .setVersion('1.0')
+    .setTitle('Yến sào nhà vui')
     .addBearerAuth(undefined, 'defaultBearerAuth')
     .build();
   const document = SwaggerModule.createDocument(app, config);

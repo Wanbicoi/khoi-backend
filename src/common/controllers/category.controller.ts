@@ -31,11 +31,11 @@ export class CategoryController {
     return this.categoryService.findAll();
   }
 
-  @Public()
-  @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.categoryService.findOne({ id });
-  }
+  // @Public()
+  // @Get(':id')
+  // findOne(@Param('id', ParseIntPipe) id: number) {
+  //   return this.categoryService.findOne({ id });
+  // }
 
   @ApiBearerAuth('defaultBearerAuth')
   @Patch(':id')

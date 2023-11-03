@@ -27,17 +27,14 @@ export class CreateProductDto {
   @IsNotEmpty()
   details: object;
 
-  @ApiProperty({ example: 100 })
+  //prettier-ignore
+  @ApiProperty({ example: ['https://bestcargo.vn/wp-content/uploads/2018/06/van-chuyen-quan-ao.jpeg','https://lzd-img-global.slatic.net/g/p/09aa33c5aa229473cc000d44d40bed5d.jpg_720x720q80.jpg' ] })
   @IsNotEmpty()
-  @Max(10000000)
-  @Min(0)
-  weight: number;
+  images: string[];
 
-  @ApiProperty({ example: 40 })
+  @ApiProperty({ example: [100, 150] })
   @IsNotEmpty()
-  @Max(10000000)
-  @Min(0)
-  quantity: number;
+  weights: number[];
 
   @ApiPropertyOptional({ example: [{ id: 1 }, { id: 2 }] })
   @IsOptional()
