@@ -4,3 +4,6 @@ export * from './create-category.dto';
 export * from './update-category.dto';
 export * from './create-blog.dto';
 export * from './update-blog.dto';
+export * from './create-comment.dto';
+export * from './update-comment.dto';
+export * from './create-question.dto';

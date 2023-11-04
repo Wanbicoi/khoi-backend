@@ -30,7 +30,7 @@ export class CategoryService {
     });
   }
 
-  remove(where: Prisma.CategoryWhereUniqueInput) {
-    return this.prisma.category.delete({ where });
+  async remove(where: Prisma.CategoryWhereUniqueInput) {
+    await this.prisma.category.delete({ where });
   }
 }

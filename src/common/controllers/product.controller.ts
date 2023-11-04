@@ -1,17 +1,19 @@
 import {
   Body,
   Controller,
+  DefaultValuePipe,
   Delete,
   Get,
   Param,
   ParseIntPipe,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { CreateProductDto } from '../dtos/create-product.dto';
 import { UpdateProductDto } from '../dtos/update-product.dto';
 import { ProductService } from '../providers/product.service';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { Public } from 'src/decorators/public.decorator';
 
 @ApiTags('products')
@@ -28,10 +30,15 @@ export class ProductController {
     });
   }
 
+  @ApiQuery({ name: 'skip', required: false })
+  @ApiQuery({ name: 'take', required: false })
   @Public()
   @Get()
-  findAll() {
-    return this.productService.findAll();
+  findAll(
+    @Query('skip', new DefaultValuePipe(0), ParseIntPipe) skip: number,
+    @Query('take', new DefaultValuePipe(20), ParseIntPipe) take: number,
+  ) {
+    return this.productService.findAll(skip, take);
   }
 
   @Public()
@@ -58,7 +65,7 @@ export class ProductController {
 
   @ApiBearerAuth('defaultBearerAuth')
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return this.productService.remove({ id });
+  async remove(@Param('id', ParseIntPipe) id: number) {
+    await this.productService.remove({ id });
   }
 }

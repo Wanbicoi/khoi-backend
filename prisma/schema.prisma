@@ -11,41 +11,51 @@ datasource db {
 }
 
 model Product {
-  id        Int      @default(autoincrement()) @id
-  title     String
+  id          Int    @id @default(autoincrement())
+  title       String
   description String
-  images    Json
-  weights   Json
-  price     Int
-  listPrice Int
-  details   Json
+  images      Json
+  weights     Json
+  price       Int
+  listPrice   Int
+  details     Json
 
   categories Category[]
-  comments Comment[]
+  comments   Comment[]
 }
 
 model Category {
-  id        Int      @default(autoincrement()) @id
-  title     String
+  id    Int    @id @default(autoincrement())
+  title String
 
   products Product[]
 }
 
 model Comment {
-  id        Int      @default(autoincrement()) @id
-  userName  String
-  userPhone String
+  id          Int    @id @default(autoincrement())
+  userName    String
+  userPhone   String
   userComment String
-  userStar  Int @db.SmallInt
+  userStar    Int    @db.SmallInt
 
-  product Product    @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now()) @db.Date
+
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId Int
 }
 
 model Blog {
-  id        Int      @default(autoincrement()) @id
-  createdAt DateTime @default(now()) @db.Date
-  title     String
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now()) @db.Date
+  title       String
   description String
-  details   Json
+  details     Json
+}
+
+model Question {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @db.Date
+  name      String
+  identity  String
+  details   String
 }
