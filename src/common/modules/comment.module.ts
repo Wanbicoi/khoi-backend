@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { CommentService } from '../providers/comment.service';
-import { CommentController } from '../controllers/comment.controller';
+import { CommentService } from '../providers';
+import { CommentController } from '../controllers';
 
 @Module({
   controllers: [CommentController],
